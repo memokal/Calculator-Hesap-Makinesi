@@ -64,7 +64,7 @@ table {
 
 /* Styling */
 
-.contaigner {display:grid; grid-template-columns:1fr; width:90%; margin:0 auto; gap:1rem; max-width:450px;}
+.contaigner {display:grid; grid-template-columns:1fr; width:90%; margin:0 auto; gap:1rem; max-width:350px;}
 .calculations {display:flex; justify-content: space-around; gap:0.4rem;}
 .calculations input{    
 	border-bottom-left-radius: 156px 182px!important;
@@ -75,11 +75,28 @@ table {
 }
 
 .screen{
-	min-height:5rem;
 	background:var(--secondary-color); 
-	border-radius: 20px 0px 20px 20px;
+	border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 150px 132px;
+    border-top-right-radius: 15px 225px;
 	border: 1px solid var(--primary-color);
 }
+
+.screen-top{
+    text-align: right;
+    color: var(--third-color);
+    font-family: var(--primary-font);
+    padding: 0.7em 5px 0.2em 0;
+}
+.screen-bottom{
+    text-align: right;
+    color: white;
+	font-size:1.6rem;
+    font-family: var(--primary-font);
+    padding: 0.2em 5px 0.4em 0;
+}
+
 .numbers {display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;}
 .number, .calculations input {
 	background-color: var(--third-color);
@@ -100,11 +117,11 @@ table {
 }
 .number:hover, .calculations input:hover {
 	box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
-	transform: translate3d(0, 2px, 0);
   }
   
-.number:focus, .calculations input:hover {
+.number:focus, .calculations input:focus {
 	box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+	transform: translate3d(0, 2px, 0);
   }
 .number:last-child{
 	border-bottom-right-radius: 20px;
