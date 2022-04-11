@@ -85,10 +85,24 @@ function calculations(x){
             if(control=="+" || control=="-" || control=="/" || control=="*"){
                 noDuplicate=true;
             }else{noDuplicate=false;}  
+            var rule=/\./; 
+            
+            // Controlling Dot Placing rules after removing a char v below v
+            if(!rule.test(calc)){ //if theres no dot you can place a dot
+                noDuplicatepoint = false;
+            }
+            var rule2=/\++.+\./;  //if theres a symbol "+"" and after it if theres a dot "." => Rule
+            var rule3=/\-+.+\./;
+            var rule4=/\*+.+\./;
+            var rule5=/\/+.+\./;
+            if(!rule2.test(calc) || !rule3.test(calc) || !rule4.test(calc) || !rule5.test(calc)){
+                noDuplicatepoint = false;} 
+
         break;
         case "RV" :
             document.getElementById("screen-bottom").innerHTML="";
             document.getElementById("screen-top").innerHTML="";
+            noDuplicatepoint=false;
         break;
     }
 }
