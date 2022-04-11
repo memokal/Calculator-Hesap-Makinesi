@@ -8,11 +8,16 @@ function number(x){ //gets element
 }
 
 function point(x){ //i decided to create another function for point "."
-    if(noDuplicatepoint==false){
-        var num=x.value;
-        document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num;
-        noDuplicatepoint=true;
-    }else{} 
+    var calc=document.getElementById("screen-bottom").innerHTML;
+    var control=calc.charAt(calc.length-1);
+    if(control!="."){
+        if(noDuplicatepoint==false){
+            var num=x.value;
+            document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num;
+            noDuplicatepoint=true;
+        }else{} 
+    }
+    
 }
 
 function calculations(x){
@@ -79,7 +84,7 @@ function calculations(x){
             var control=calc.charAt(calc.length-1);
             if(control=="+" || control=="-" || control=="/" || control=="*"){
                 noDuplicate=true;
-            }else{noDuplicate=false; noDuplicatepoint=false;}  
+            }else{noDuplicate=false;}  
         break;
     }
 }
