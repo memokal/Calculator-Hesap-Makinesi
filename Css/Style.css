@@ -82,21 +82,25 @@ table {
     border-top-right-radius: 15px 225px;
 	border: 1px solid var(--primary-color);
 	max-width: 350px;
+	min-height: 74px;
     overflow-wrap: break-word;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #screen-top{
     text-align: right;
     color: var(--third-color);
     font-family: var(--primary-font);
-    padding: 0.7em 5px 0.2em 0;
+	padding: 0 0.3rem 0 0;
 }
 #screen-bottom{
     text-align: right;
     color: white;
 	font-size:1.6rem;
     font-family: var(--primary-font);
-    padding: 0.2em 5px 0.4em 0;
+	padding: 0.3rem 0.3rem 0 0;
 }
 
 .numbers {display:grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;}

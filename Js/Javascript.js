@@ -86,6 +86,10 @@ function calculations(x){
                 noDuplicate=true;
             }else{noDuplicate=false;}  
         break;
+        case "RV" :
+            document.getElementById("screen-bottom").innerHTML="";
+            document.getElementById("screen-top").innerHTML="";
+        break;
     }
 }
 
