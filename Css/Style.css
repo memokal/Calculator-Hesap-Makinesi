@@ -81,15 +81,17 @@ table {
     border-top-left-radius: 150px 132px;
     border-top-right-radius: 15px 225px;
 	border: 1px solid var(--primary-color);
+	max-width: 33ch;
+    overflow-wrap: break-word;
 }
 
-.screen-top{
+#screen-top{
     text-align: right;
     color: var(--third-color);
     font-family: var(--primary-font);
     padding: 0.7em 5px 0.2em 0;
 }
-.screen-bottom{
+#screen-bottom{
     text-align: right;
     color: white;
 	font-size:1.6rem;
