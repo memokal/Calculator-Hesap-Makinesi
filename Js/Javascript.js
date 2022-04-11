@@ -1,9 +1,18 @@
 var noDuplicate = false;
+var noDuplicatepoint = false;
 
 function number(x){ //gets element
     var num=x.value;  //gets element's value and equals it to variable num   
     document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num; //writes the numer into innerHTML and memorizes it
     noDuplicate=false; //it means we can place a calculation symbol after a number
+}
+
+function point(x){ //i decided to create another function for point "."
+    if(noDuplicatepoint==false){
+        var num=x.value;
+        document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num;
+        noDuplicatepoint=true;
+    }else{} 
 }
 
 function calculations(x){
@@ -15,9 +24,11 @@ function calculations(x){
                 calc=calc+"+"; //places a "+" on memory
                 document.getElementById("screen-bottom").innerHTML=calc; // writes memory to innerHTML
                 noDuplicate=true; // marks that we placed a "+" in the end of string
+                noDuplicatepoint=false; // marks that we can place a point "."
             }else{ // if theres a duplication of calculation symbols
                 calc = calc.substring(0, calc.length - 1); //removes last letter or symbol
                 document.getElementById("screen-bottom").innerHTML=calc+"+"; //replaces with a new symbol, so we can dynamically change between symbols
+                noDuplicatepoint=false;
             }
         break;
         case "-" :
@@ -26,9 +37,11 @@ function calculations(x){
                 calc=calc+"-";
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
+                noDuplicatepoint=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"-";
+                noDuplicatepoint=false;
             }
         break;
         case "×" :
@@ -37,9 +50,11 @@ function calculations(x){
                 calc=calc+"*";
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
+                noDuplicatepoint=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"*";
+                noDuplicatepoint=false;
             }
         break;
         case "÷" :
@@ -48,9 +63,11 @@ function calculations(x){
                 calc=calc+"/";
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
+                noDuplicatepoint=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"/";
+                noDuplicatepoint=false;
             }
         break;
         case "AC" :
@@ -62,7 +79,7 @@ function calculations(x){
             var control=calc.charAt(calc.length-1);
             if(control=="+" || control=="-" || control=="/" || control=="*"){
                 noDuplicate=true;
-            }else{noDuplicate=false;}  
+            }else{noDuplicate=false; noDuplicatepoint=false;}  
         break;
     }
 }
