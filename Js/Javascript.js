@@ -69,7 +69,12 @@ function calculations(x){
 
 function calculate(){
     var calc=document.getElementById("screen-bottom").innerHTML;
-    document.getElementById("screen-top").innerHTML=calc+"=";
-    var result = eval(calc); //im aware of eval() but im a beginner javascripter so i cannot build my own string calc function i will see it later.
-    document.getElementById("screen-bottom").innerHTML=result;
+    if(calc==""){ //if innerHTML is empty return empty. to avoid "undefined" string that appears
+        document.getElementById("screen-bottom").innerHTML="";
+        document.getElementById("screen-top").innerHTML="";
+    }else {
+        document.getElementById("screen-top").innerHTML=calc+"=";
+        var result = eval(calc); //im aware of eval() but im a beginner javascripter so i cannot build my own string calc function i will see it later.
+        document.getElementById("screen-bottom").innerHTML=result;
+    }
 }
