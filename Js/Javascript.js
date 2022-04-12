@@ -1,7 +1,7 @@
 var noDuplicate = false;  // Variable that checks duplications of calculation symbols
 var noDuplicatepoint = false;   // Variable that checks "." dot duplications
 var reset = false; // Variable that checks and controls after calculate() function
-var ruleSymbol=false; // this variable checks if .screen-bottom is empty you cant simply place related symbol
+var ruleSymbol=false; // this variable checks if .screen-bottom is empty so you cant simply place related symbol
 
 function number(x){ //gets element
     if(ruleSymbol==true){ruleSymbol=false;}
@@ -19,8 +19,8 @@ function number(x){ //gets element
 function point(x){ //i decided to create another function for point "."
     var calc=document.getElementById("screen-bottom").innerHTML;
     var control=calc.charAt(calc.length-1);
-    if(ruleSymbol==true){ruleSymbol=false;}
-    if(control!="."){
+    if(ruleSymbol==true){ruleSymbol=false;} //checks if .screen-bottom empty
+    if(control!="."){ //checks last character
         if(noDuplicatepoint==false){
             var num=x.value;
             document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num;
@@ -35,6 +35,9 @@ function calculations(x){
     switch(a){
         case "+" : //if value is a "+"
             var calc=document.getElementById("screen-bottom").innerHTML;
+            var control=calc.charAt(calc.length-1);
+            if(calc==""){ruleSymbol=true;} 
+            if(control!="."){ // this rule checks if theres a dot before a symbol so you cant spam "." and "symbol"
             if(noDuplicate==false){ //checking duplication of calculation symbols
                 calc=calc+"+"; //places a "+" on memory
                 document.getElementById("screen-bottom").innerHTML=calc; // writes memory to innerHTML
@@ -46,9 +49,13 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"+"; //replaces with a new symbol, so we can dynamically change between symbols
                 noDuplicatepoint=false;
             }
+        }else{}
         break;
         case "-" :
             var calc=document.getElementById("screen-bottom").innerHTML;
+            var control=calc.charAt(calc.length-1);
+            if(calc==""){ruleSymbol=true;}
+            if(control!="."){
             if(noDuplicate==false){
                 calc=calc+"-";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -60,10 +67,13 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"-";
                 noDuplicatepoint=false;
             }
+            }else{}
         break;
         case "×" :
             var calc=document.getElementById("screen-bottom").innerHTML;
+            var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;}
+            if(control!="."){
             if(noDuplicate==false){
                 calc=calc+"*";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -75,11 +85,14 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"*";
                 noDuplicatepoint=false;
             }
+        }else{}
             if(ruleSymbol==true){document.getElementById("screen-bottom").innerHTML="";}
         break;
         case "÷" :
             var calc=document.getElementById("screen-bottom").innerHTML;
+            var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;}
+            if(control!="."){
             if(noDuplicate==false){
                 calc=calc+"/";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -91,6 +104,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"/";
                 noDuplicatepoint=false;
             }
+        }else{}
             if(ruleSymbol==true){document.getElementById("screen-bottom").innerHTML="";}
         break;
         case "AC" :
