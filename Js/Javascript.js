@@ -1,8 +1,10 @@
 var noDuplicate = false;  // Variable that checks duplications of calculation symbols
 var noDuplicatepoint = false;   // Variable that checks "." dot duplications
 var reset = false; // Variable that checks and controls after calculate() function
+var ruleSymbol=false; // this variable checks if .screen-bottom is empty you cant simply place related symbol
 
 function number(x){ //gets element
+    if(ruleSymbol==true){ruleSymbol=false;}
     if(reset==true){ // Checks if we calculated recently if yes does some changes v below v
     document.getElementById("screen-top").innerHTML=document.getElementById("screen-bottom").innerHTML; // switches result to top class
     document.getElementById("screen-bottom").innerHTML=""; // if reset=true cleans screen-bottom
@@ -17,6 +19,7 @@ function number(x){ //gets element
 function point(x){ //i decided to create another function for point "."
     var calc=document.getElementById("screen-bottom").innerHTML;
     var control=calc.charAt(calc.length-1);
+    if(ruleSymbol==true){ruleSymbol=false;}
     if(control!="."){
         if(noDuplicatepoint==false){
             var num=x.value;
@@ -60,6 +63,7 @@ function calculations(x){
         break;
         case "×" :
             var calc=document.getElementById("screen-bottom").innerHTML;
+            if(calc==""){ruleSymbol=true;}
             if(noDuplicate==false){
                 calc=calc+"*";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -71,9 +75,11 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"*";
                 noDuplicatepoint=false;
             }
+            if(ruleSymbol==true){document.getElementById("screen-bottom").innerHTML="";}
         break;
         case "÷" :
             var calc=document.getElementById("screen-bottom").innerHTML;
+            if(calc==""){ruleSymbol=true;}
             if(noDuplicate==false){
                 calc=calc+"/";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -85,6 +91,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc+"/";
                 noDuplicatepoint=false;
             }
+            if(ruleSymbol==true){document.getElementById("screen-bottom").innerHTML="";}
         break;
         case "AC" :
             if(reset==true){ // Checks if we calculated recently if yes does some changes v below v
