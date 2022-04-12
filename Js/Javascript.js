@@ -1,11 +1,18 @@
-var noDuplicate = false;
-var noDuplicatepoint = false;
+var noDuplicate = false;  // Variable that checks duplications of calculation symbols
+var noDuplicatepoint = false;   // Variable that checks "." dot duplications
+var reset = false; // Variable that checks and controls after calculate() function
 
 function number(x){ //gets element
+    if(reset==true){ // Checks if we calculated recently if yes does some changes v below v
+    document.getElementById("screen-top").innerHTML=document.getElementById("screen-bottom").innerHTML; // switches result to top class
+    document.getElementById("screen-bottom").innerHTML=""; // if reset=true cleans screen-bottom
+    reset=false;
+}
     var num=x.value;  //gets element's value and equals it to variable num   
     document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num; //writes the numer into innerHTML and memorizes it
     noDuplicate=false; //it means we can place a calculation symbol after a number
 }
+
 
 function point(x){ //i decided to create another function for point "."
     var calc=document.getElementById("screen-bottom").innerHTML;
@@ -30,6 +37,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc; // writes memory to innerHTML
                 noDuplicate=true; // marks that we placed a "+" in the end of string
                 noDuplicatepoint=false; // marks that we can place a point "."
+                reset=false;
             }else{ // if theres a duplication of calculation symbols
                 calc = calc.substring(0, calc.length - 1); //removes last letter or symbol
                 document.getElementById("screen-bottom").innerHTML=calc+"+"; //replaces with a new symbol, so we can dynamically change between symbols
@@ -43,6 +51,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
                 noDuplicatepoint=false;
+                reset=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"-";
@@ -56,6 +65,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
                 noDuplicatepoint=false;
+                reset=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"*";
@@ -69,6 +79,7 @@ function calculations(x){
                 document.getElementById("screen-bottom").innerHTML=calc;
                 noDuplicate=true;
                 noDuplicatepoint=false;
+                reset=false;
             }else{
                 calc = calc.substring(0, calc.length - 1);
                 document.getElementById("screen-bottom").innerHTML=calc+"/";
@@ -76,6 +87,11 @@ function calculations(x){
             }
         break;
         case "AC" :
+            if(reset==true){ // Checks if we calculated recently if yes does some changes v below v
+                document.getElementById("screen-top").innerHTML=document.getElementById("screen-bottom").innerHTML; // switches result to top class
+                document.getElementById("screen-bottom").innerHTML=""; // if reset=true cleans screen-bottom
+                reset=false;
+            }
             //picks innerHTML and removes last string - v below v
             var calc=document.getElementById("screen-bottom").innerHTML;
             calc = calc.substring(0, calc.length - 1);
@@ -116,5 +132,7 @@ function calculate(){
         document.getElementById("screen-top").innerHTML=calc+"=";
         var result = eval(calc); //im aware of eval() but im a beginner javascripter so i cannot build my own string calc function i will see it later.
         document.getElementById("screen-bottom").innerHTML=result;
+        noDuplicatepoint=false;
+        reset=true;
     }
 }
