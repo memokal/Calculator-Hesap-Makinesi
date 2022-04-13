@@ -2,6 +2,7 @@ var noDuplicate = false;  // Variable that checks duplications of calculation sy
 var noDuplicatepoint = false;   // Variable that checks "." dot duplications
 var reset = false; // Variable that checks and controls after calculate() function
 var ruleSymbol=false; // this variable checks if .screen-bottom is empty so you cant simply place related symbol
+var situation=false; // Variable that created for a spesific situation >> "3*-" prevents to be able to place more symbols after that
 
 function number(x){ //gets element
     if(ruleSymbol==true){ruleSymbol=false;}
@@ -9,10 +10,12 @@ function number(x){ //gets element
     document.getElementById("screen-top").innerHTML=document.getElementById("screen-bottom").innerHTML; // switches result to top class
     document.getElementById("screen-bottom").innerHTML=""; // if reset=true cleans screen-bottom
     reset=false;
+    situation=false;
 }
     var num=x.value;  //gets element's value and equals it to variable num   
     document.getElementById("screen-bottom").innerHTML=document.getElementById("screen-bottom").innerHTML+num; //writes the numer into innerHTML and memorizes it
     noDuplicate=false; //it means we can place a calculation symbol after a number
+    situation=false;
 }
 
 
@@ -37,7 +40,7 @@ function calculations(x){
             var calc=document.getElementById("screen-bottom").innerHTML;
             var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;} 
-            if(control!="."){ // this rule checks if theres a dot before a symbol so you cant spam "." and "symbol"
+            if(control!="." && situation==false){ // this rule checks if theres a dot before a symbol so you cant spam "." and "symbol" --  AND  -- checks if theres a situaion "symbol"+"-" and disables all "calculation" buttons until an action happens.
             if(noDuplicate==false){ //checking duplication of calculation symbols
                 calc=calc+"+"; //places a "+" on memory
                 document.getElementById("screen-bottom").innerHTML=calc; // writes memory to innerHTML
@@ -55,6 +58,7 @@ function calculations(x){
             var calc=document.getElementById("screen-bottom").innerHTML;
             var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;}
+            if(control=="*" || control=="/"){noDuplicate=false; situation=true;} // checks last character, if those symbols exist you can place "-" minus
             if(control!="."){
             if(noDuplicate==false){
                 calc=calc+"-";
@@ -73,7 +77,7 @@ function calculations(x){
             var calc=document.getElementById("screen-bottom").innerHTML;
             var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;}
-            if(control!="."){
+            if(control!="." && situation==false){
             if(noDuplicate==false){
                 calc=calc+"*";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -92,7 +96,7 @@ function calculations(x){
             var calc=document.getElementById("screen-bottom").innerHTML;
             var control=calc.charAt(calc.length-1);
             if(calc==""){ruleSymbol=true;}
-            if(control!="."){
+            if(control!="." && situation==false){
             if(noDuplicate==false){
                 calc=calc+"/";
                 document.getElementById("screen-bottom").innerHTML=calc;
@@ -112,6 +116,7 @@ function calculations(x){
                 document.getElementById("screen-top").innerHTML=document.getElementById("screen-bottom").innerHTML; // switches result to top class
                 document.getElementById("screen-bottom").innerHTML=""; // if reset=true cleans screen-bottom
                 reset=false;
+                situation=false;
             }
             //picks innerHTML and removes last string - v below v
             var calc=document.getElementById("screen-bottom").innerHTML;
@@ -133,13 +138,14 @@ function calculations(x){
             var rule4=/\*+.+\./;
             var rule5=/\/+.+\./;
             if(!rule2.test(calc) || !rule3.test(calc) || !rule4.test(calc) || !rule5.test(calc)){
-                noDuplicatepoint = false;} 
-
+                noDuplicatepoint = false;} //dots are enabled again
+                situation=false; // situation ended
         break;
         case "RV" :
             document.getElementById("screen-bottom").innerHTML="";
             document.getElementById("screen-top").innerHTML="";
             noDuplicatepoint=false;
+            situation=false;
         break;
     }
 }
